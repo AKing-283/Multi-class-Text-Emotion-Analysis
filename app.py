@@ -2,14 +2,14 @@ import streamlit as st
 import joblib
 import random
 
-# Load the trained model
+# Load the model
 with open('emotion_pipeline_model.pkl', 'rb') as model_file:
     model = joblib.load(model_file)
 
 # Define emotion mapping
 emotion_mapping = {
-    0: 'happy',
-    1: 'sad',
+    1: 'happy',
+    0: 'sad',
     2: 'angry',
     3: 'neutral'
 }
@@ -38,7 +38,7 @@ def get_emotion_response(emotion):
             "Would you like to talk about something fun? 🎉"
         ]
     }
-    return random.choice(responses[emotion])
+    return random.choice(responses.get(emotion, "I'm here to help, no matter what you're feeling! 💜"))
 
 # Streamlit UI
 st.title("🗣️ Emotion-Based Chatbot")
@@ -47,40 +47,12 @@ st.write("Type a message and let the chatbot detect the emotion and respond.")
 user_input = st.text_input("You:", "")
 
 if user_input:
-    predicted_label = model.predict([user_input])[0]  # Predict emotion
-
-    # Get emotion label (default to 'neutral' if not found)
-    predicted_emotion = emotion_mapping.get(predicted_label, 'neutral')
-
-    # Show confidence scores only for valid emotions
-    if hasattr(model, "predict_proba"):
-        probas = model.predict_proba([user_input])[0]
-        valid_labels = [emotion_mapping[i] for i in emotion_mapping]  # Only mapped emotions
-        probas_dict = {valid_labels[i]: probas[i] for i in range(len(valid_labels))}
-        st.write("**Prediction Confidence:**", probas_dict)
-
+    predicted_label = model.predict([user_input])[0]  # Predicts emotion
+    
+    # Ensure predicted_label is an integer and map to emotion text
+    predicted_emotion = emotion_mapping.get(int(predicted_label), 'neutral')
+    
     response = get_emotion_response(predicted_emotion)
 
     st.write(f"**Emotion Detected:** {predicted_emotion.capitalize()}")
     st.write(f"🤖 **Chatbot:** {response}")
-
-# ----------------------------
-# 🔹 TEST CASES (Uncomment to test)
-# ----------------------------
-# if st.button("Run Test Cases"):
-#     test_inputs = [
-#         "I just got a promotion at work! 🎉",  # Expected: Happy
-#         "I feel so lonely right now...",  # Expected: Sad
-#         "Why do people never listen to me? 😡",  # Expected: Angry
-#         "It looks like it might rain today.",  # Expected: Neutral
-#         "I am feeling extremely joyful today!",  # Expected: Happy
-#         "I'm really upset about what happened.",  # Expected: Sad
-#         "This is so frustrating! I can't believe this.",  # Expected: Angry
-#         "Everything is okay, I guess.",  # Expected: Neutral
-#     ]
-#     
-#     for text in test_inputs:
-#         emotion_pred = model.predict([text])[0]
-#         mapped_emotion = emotion_mapping.get(emotion_pred, 'neutral')
-#         st.write(f"**Input:** {text} → **Predicted Emotion:** {mapped_emotion.capitalize()}")
-
