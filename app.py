@@ -38,7 +38,7 @@ def get_emotion_response(emotion):
             "Would you like to talk about something fun? 🎉"
         ]
     }
-    return random.choice(responses.get(emotion, ["I'm not sure how to respond, but I'm here to listen!"]))
+    return random.choice(responses[emotion])
 
 # Streamlit UI
 st.title("🗣️ Emotion-Based Chatbot")
@@ -49,8 +49,8 @@ user_input = st.text_input("You:", "")
 if user_input:
     predicted_label = model.predict([user_input])[0]  # Predicts emotion
 
-    # If the prediction is a number, map it to an emotion
-    predicted_emotion = emotion_mapping.get(predicted_label, "unknown")
+    # Map prediction to emotion (defaults to 'neutral' if not found)
+    predicted_emotion = emotion_mapping.get(predicted_label, 'neutral')
 
     # Debugging confidence scores (if available)
     if hasattr(model, "predict_proba"):
@@ -60,7 +60,7 @@ if user_input:
 
     response = get_emotion_response(predicted_emotion)
 
-    st.write(f"**Emotion Detected:** {predicted_emotion}")
+    st.write(f"**Emotion Detected:** {predicted_emotion.capitalize()}")
     st.write(f"🤖 **Chatbot:** {response}")
 
 # ----------------------------
@@ -71,10 +71,15 @@ if user_input:
 #         "I just got a promotion at work! 🎉",  # Expected: Happy
 #         "I feel so lonely right now...",  # Expected: Sad
 #         "Why do people never listen to me? 😡",  # Expected: Angry
-#         "It looks like it might rain today."  # Expected: Neutral
+#         "It looks like it might rain today.",  # Expected: Neutral
+#         "I am feeling extremely joyful today!",  # Expected: Happy
+#         "I'm really upset about what happened.",  # Expected: Sad
+#         "This is so frustrating! I can't believe this.",  # Expected: Angry
+#         "Everything is okay, I guess.",  # Expected: Neutral
 #     ]
 #     
 #     for text in test_inputs:
 #         emotion_pred = model.predict([text])[0]
-#         mapped_emotion = emotion_mapping.get(emotion_pred, "unknown")
-#         st.write(f"**Input:** {text} → **Predicted Emotion:** {mapped_emotion}")
+#         mapped_emotion = emotion_mapping.get(emotion_pred, 'neutral')
+#         st.write(f"**Input:** {text} → **Predicted Emotion:** {mapped_emotion.capitalize()}")
+
