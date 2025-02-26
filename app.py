@@ -3,7 +3,7 @@ import joblib
 import random
 
 # Load the trained model (which already includes CountVectorizer inside)
-with open('/Users/puspakd/Sem VI/emotion_pipeline_model.pkl', 'rb') as model_file:
+with open('emotion_pipeline_model.pkl', 'rb') as model_file:
     model = joblib.load(model_file)
 
 # Emotion Mapping (Modify if your model uses different numeric labels)
