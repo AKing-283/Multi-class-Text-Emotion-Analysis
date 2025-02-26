@@ -9,9 +9,9 @@ with open('emotion_pipeline_model.pkl', 'rb') as model_file:
 # Define emotion mapping
 emotion_mapping = {
     1: 'happy',
-    0: 'sad',
-    2: 'angry',
-    3: 'neutral'
+    2: 'sad',
+    3: 'angry',
+    0: 'neutral'
 }
 
 # Function to get chatbot responses
