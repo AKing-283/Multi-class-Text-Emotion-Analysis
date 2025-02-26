@@ -2,9 +2,11 @@ import streamlit as st
 import joblib
 import random
 
+# Load the trained model
 with open('emotion_pipeline_model.pkl', 'rb') as model_file:
     model = joblib.load(model_file)
 
+# Define emotion mapping
 emotion_mapping = {
     0: 'happy',
     1: 'sad',
@@ -45,16 +47,17 @@ st.write("Type a message and let the chatbot detect the emotion and respond.")
 user_input = st.text_input("You:", "")
 
 if user_input:
-    predicted_label = model.predict([user_input])[0]  # Predicts emotion
+    predicted_label = model.predict([user_input])[0]  # Predict emotion
 
-    # Map prediction to emotion (defaults to 'neutral' if not found)
+    # Get emotion label (default to 'neutral' if not found)
     predicted_emotion = emotion_mapping.get(predicted_label, 'neutral')
 
-    # Debugging confidence scores (if available)
+    # Show confidence scores only for valid emotions
     if hasattr(model, "predict_proba"):
         probas = model.predict_proba([user_input])[0]
-        emotion_labels = [emotion_mapping.get(i, f"Unknown({i})") for i in range(len(probas))]
-        st.write("**Prediction Confidence:**", dict(zip(emotion_labels, probas)))
+        valid_labels = [emotion_mapping[i] for i in emotion_mapping]  # Only mapped emotions
+        probas_dict = {valid_labels[i]: probas[i] for i in range(len(valid_labels))}
+        st.write("**Prediction Confidence:**", probas_dict)
 
     response = get_emotion_response(predicted_emotion)
 
