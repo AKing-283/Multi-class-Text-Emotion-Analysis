@@ -16,6 +16,7 @@ This project is an open-source **Multi-Class Text Emotion Analysis** system that
 - **pandas**
 - **numpy**
 - **Streamlit**
+- **Natural Language Processing**
 
 
 ## 📊 Dataset
