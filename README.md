@@ -32,7 +32,8 @@ git clone https://github.com/AKing-283/multi-class-text-emotion-analysis.git
 cd multi-class-emotion-analysis
 pip install -r requirements.txt
 ```
-
+## Disclaimer
+This model is trained using Logistic Regression and Count Vectorizer. When words below 20 is used in this then it will give wrong output so a word limit of 20 is needed in this for good output
 
 ## 🔗 Contributing
 Feel free to open an issue or submit a pull request if you find any improvements or bugs.
