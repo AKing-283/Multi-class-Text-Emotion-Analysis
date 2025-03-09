@@ -1,0 +1,130 @@
+/* Apply Background Image */
+body {
+    background-image: url("/static/Background_image.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+}
+
+/* Centered Container */
+.container {
+    width: 50%;
+    margin: auto;
+    background-color: transparent;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 100px;
+}
+
+/* Glowing Title Effect */
+@keyframes glowing {
+    0% { text-shadow: 0 0 5px #ff5733, 0 0 10px #ffbd69; }
+    50% { text-shadow: 0 0 20px #ff5733, 0 0 40px #ffbd69; }
+    100% { text-shadow: 0 0 5px #ff5733, 0 0 10px #ffbd69; }
+}
+
+.glowing-title {
+    font-size: 50px;
+    font-weight: bold;
+    animation: glowing 1.5s infinite alternate;
+}
+
+.glowing-subtitle {
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 0 0 5px #6a0dad, 0 0 10px #483d8b;
+}
+
+/* Form Styling */
+.custom-label {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+textarea {
+    width: 90%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 10px;
+    height: 60px;
+}
+
+/* Button Styling */
+button {
+    background-color: #ff5733;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #ff2e00;
+}
+
+/* Emotion Response Box */
+.response-box {
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Emotion Colors */
+.happy { background-color: #ffeb3b; color: black; }
+.sad { background-color: #64b5f6; color: white; }
+.angry { background-color: #e57373; color: white; }
+.neutral { background-color: #bdbdbd; color: black; }
+
+/* Try Again Button */
+a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+a:hover {
+    background: #2980b9;
+}
+
+    .analyze-btn {
+        background-color: #4CAF50; /* Green background */
+        border: none;
+        color: white;
+        padding: 12px 24px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 8px;
+        transition: background-color 0.3s, transform 0.2s;
+        cursor: pointer;
+    }
+
+    .analyze-btn:hover {
+        background-color: #45a049; /* Darker green on hover */
+        transform: scale(1.05); /* Slight zoom effect */
+    }
+
+    .analyze-btn:active {
+        background-color: #3e8e41; /* Even darker green on click */
+        transform: scale(0.98); /* Slight press-down effect */
+    }
+
+
+
