@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emotion Detector</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %} Emotion Detector {% endblock %}
+
+    {% block content %}
     <div class="container">
         <h1 class="glowing-title">🗣️ Emotion-Based Chatbot</h1>
         <p class="glowing-subtitle">Type a message and let the chatbot detect the emotion</p>
@@ -20,5 +15,4 @@
             <button class="analyze-btn" type="submit">Analyze Emotion</button>
         </form>
     </div>
-</body>
-</html>
+    {% endblock %}
