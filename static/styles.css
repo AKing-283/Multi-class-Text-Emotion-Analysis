@@ -102,7 +102,7 @@ a:hover {
 }
 
     .analyze-btn {
-        background-color: #4CAF50; /* Green background */
+        background: linear-gradient(45deg, #4CAF50, #45a049);
         border: none;
         color: white;
         padding: 12px 24px;
@@ -112,19 +112,73 @@ a:hover {
         font-size: 18px;
         font-weight: bold;
         border-radius: 8px;
-        transition: background-color 0.3s, transform 0.2s;
+        transition: all 0.3s ease;
         cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
     .analyze-btn:hover {
-        background-color: #45a049; /* Darker green on hover */
-        transform: scale(1.05); /* Slight zoom effect */
+        background: linear-gradient(45deg, #45a049, #4CAF50);
+        transform: scale(1.05) rotate(2deg); /* Slight zoom effect */
+        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
     }
 
     .analyze-btn:active {
         background-color: #3e8e41; /* Even darker green on click */
-        transform: scale(0.98); /* Slight press-down effect */
+        transform: scale(0.98) rotate(-1deg); /* Slight press-down effect */
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
+
+.analyze-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255,255,255,0.1);
+    transform: rotate(45deg) translateX(-100%);
+    transition: all 0.5s ease;
+}
+
+.analyze-btn:hover::after {
+    transform: rotate(45deg) translateX(100%);
+}
+
+/* Add a pulsing animation when button is in focus */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(76,175,80,0.5); }
+    70% { box-shadow: 0 0 0 10px rgba(76,175,80,0); }
+    100% { box-shadow: 0 0 0 0 rgba(76,175,80,0); }
+}
+
+.analyze-btn:focus {
+    animation: pulse 1s infinite;
+    outline: none;
+}
+
+/* Add a border animation on hover */
+.analyze-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.analyze-btn:hover::before {
+    border-color: rgba(255,255,255,0.5);
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+}
 
 
 
