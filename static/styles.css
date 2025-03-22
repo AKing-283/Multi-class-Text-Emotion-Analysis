@@ -62,7 +62,7 @@ textarea {
 
 /* Button Styling */
 button {
-    background-color: #ff5733;
+    background-color:linear-gradient(orange, rgb(241, 107, 5),red,);
     color: white;
     padding: 10px 20px;
     font-size: 18px;
@@ -74,6 +74,8 @@ button {
 
 button:hover {
     background-color: #ff2e00;
+    color: black;
+    font-weight: 600;
 }
 
 /* Emotion Response Box */
@@ -104,11 +106,12 @@ a {
 }
 
 a:hover {
-    background: #2980b9;
+    background: #1a7dbe;
+    text-decoration: none;
 }
 
     .analyze-btn {
-        background-color: #4CAF50; /* Green background */
+        background-color: linear-gradient(rgb(13, 237, 13),rgb(15, 158, 225)); /* Green background */
         border: none;
         color: white;
         padding: 12px 24px;
@@ -123,13 +126,14 @@ a:hover {
     }
 
     .analyze-btn:hover {
-        background-color: #45a049; /* Darker green on hover */
+        background-color: #16d420; /* Darker green on hover */
         transform: scale(1.05); /* Slight zoom effect */
     }
 
     .analyze-btn:active {
         background-color: #3e8e41; /* Even darker green on click */
         transform: scale(0.98); /* Slight press-down effect */
+        font-weight: 600;
     }
 
 
