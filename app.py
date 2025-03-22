@@ -31,7 +31,7 @@ def get_emotion_response(emotion):
             "Enjoy the moment! Life is beautiful. 🌟"
         ],
         "sad": [
-            "I'm here for you. Remember, tough times don’t last. 💙",
+            "I'm here for you. Remember, tough times don't last. 💙",
             "It's okay to feel sad sometimes. You're not alone. 🤗",
             "Try to do something you enjoy—it might lift your mood! ☀️"
         ],

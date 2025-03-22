@@ -17,6 +17,12 @@ body {
     padding: 20px;
     border-radius: 10px;
     margin-top: 100px;
+    background: rgba( 24, 23, 23, 0.2 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 12px );
+    -webkit-backdrop-filter: blur( 12px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 /* Glowing Title Effect */
