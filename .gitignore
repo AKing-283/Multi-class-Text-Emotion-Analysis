@@ -1,0 +1,6 @@
+venv
+content/data_prep.csv
+content/emotion_data_prep_test.csv
+content/emotion_data_prep_train.csv
+content/emotion_data_prep.csv
+content/sad_prep.csv
