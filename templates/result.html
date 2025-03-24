@@ -1,31 +1,59 @@
 {% extends "base.html" %}
+
 {% block title %} Emotion Detector {% endblock %}
 
-    {% block style %}
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
-            margin: 0; /* Remove default body margin */
-            text-align: center; /* Center text within the body */
-        }
+{% block style %}
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
+        margin: 0; /* Remove default body margin */
+        text-align: center; /* Center text within the body */
+    }
 
-        .a_tryagain{
-            margin-top: 20px;
-        }
+    .a_tryagain {
+        margin-top: 20px;
+        text-decoration: none;
+        font-weight: bold;
+        color: white;
+        background-color: #007bff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: 0.3s ease-in-out;
+    }
 
-    </style>
+    .a_tryagain:hover {
+        background-color: #0056b3;
+    }
+
+    .glowing-title {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #f8f9fa;
+        text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+    }
+
+    .glowing-subtitle {
+        font-size: 1.2rem;
+        color: #f8f9fa;
+        text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.6);
+    }
+
+    .emoji {
+        font-size: 2rem;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
 <div class="container">
     <h1 class="glowing-title">Emotion Detection Result</h1>
     <p class="glowing-subtitle"><strong>You entered:</strong> {{ user_input }}</p>
+    <p class="glowing-subtitle"><strong>Predicted Emotion:</strong> {{ emotion }} <span class="emoji">{{ emoji }}</span></p>
     <p class="glowing-subtitle">{{ response }}</p>
-    <p class="glowing-subtitle"><strong>Predicted Emotion:</strong> {{ emotion }}</p>
     <a href="/" class="a_tryagain">Try Again</a>
 </div>
 {% endblock %}
