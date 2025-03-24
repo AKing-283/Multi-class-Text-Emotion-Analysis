@@ -1,8 +1,9 @@
 {% extends "base.html" %}
+
 {% block title %} Error Page {% endblock %}
 
-    {% block content %}
+{% block content %}
     <h2>Error</h2>
     <p>{{ message }}</p>
-    <a href="{{url_for('home')}}">Go Back</a>
-    {% endbloxk %}
+    <a href="{{ url_for('home') }}">Go Back</a>
+{% endblock %}

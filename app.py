@@ -14,12 +14,12 @@ except Exception as e:
     print(f"Error loading model: {e}")
     model = None  # Prevent crashes if model is missing
 
-# Define emotion mapping
+# Define emotion mapping with corresponding emojis
 emotion_mapping = {
-    1: "happy",
-    2: "sad",
-    3: "angry",
-    0: "neutral"
+    1: ("happy", "😊"),
+    2: ("sad", "😢"),
+    3: ("angry", "😡"),
+    0: ("neutral", "😐")
 }
 
 # Function to get chatbot responses
@@ -64,12 +64,12 @@ def predict():
         
         try:
             predicted_label = model.predict([user_input])[0]  # Predict emotion
-            predicted_emotion = emotion_mapping.get(int(predicted_label), "neutral")
+            predicted_emotion, emoji = emotion_mapping.get(int(predicted_label), ("neutral", "🤔"))
             response = get_emotion_response(predicted_emotion)
         except Exception as e:
             return render_template("error.html", message=f"Prediction failed: {str(e)}")
 
-        return render_template("result.html", user_input=user_input, emotion=predicted_emotion, response=response)
+        return render_template("result.html", user_input=user_input, emotion=predicted_emotion, emoji=emoji, response=response)
 
 if __name__ == "__main__":
     app.run(debug=True)
