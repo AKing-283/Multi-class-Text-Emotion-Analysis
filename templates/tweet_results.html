@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %} Tweet Results {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="glowing-title">Results for "{{ search_term }}"</h1>
+    
+    <div class="tweet-list">
+        {% for tweet in tweets %}
+        <div class="tweet-box {{ tweet.emotion }}">
+            <p>{{ tweet.text }}</p>
+            <div class="emotion-tag">
+                {{ tweet.emotion|capitalize }} {{ tweet.emoji }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <a href="/analyze_tweets" class="a_tryagain">New Search</a>
+</div>
+
+<style>
+    .tweet-list {
+        margin-top: 30px;
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+
+    .tweet-box {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 15px;
+        margin: 10px 0;
+        text-align: left;
+    }
+
+    .emotion-tag {
+        font-weight: bold;
+        margin-top: 10px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        display: inline-block;
+    }
+
+    .happy { background-color: #ffeb3b; color: black; }
+    .sad { background-color: #64b5f6; color: white; }
+    .angry { background-color: #e57373; color: white; }
+    .neutral { background-color: #bdbdbd; color: black; }
+</style>
+{% endblock %}

@@ -2,6 +2,16 @@ from flask import Flask, render_template, request
 import joblib
 import os
 import random
+import tweepy
+from dotenv import load_dotenv
+import os
+from flask_limiter import Limiter
+
+load_dotenv()
+TWITTER_BEARER_TOKEN = os.getenv("TWITTER_BEARER_TOKEN")
+
+def get_twitter_client():
+    return tweepy.Client(bearer_token=TWITTER_BEARER_TOKEN)
 
 app = Flask(__name__)
 
@@ -70,6 +80,47 @@ def predict():
             return render_template("error.html", message=f"Prediction failed: {str(e)}")
 
         return render_template("result.html", user_input=user_input, emotion=predicted_emotion, emoji=emoji, response=response)
+    
+@app.route("/analyze_tweets", methods=["GET", "POST"])
+def analyze_tweets():
+    if request.method == "POST":
+        search_query = request.form.get("search_query", "")
+        if not search_query:
+            return render_template("error.html", message="Please enter a search term.")
+        
+        try:
+            client = get_twitter_client()
+            tweets = client.search_recent_tweets(
+                query=search_query,
+                max_results=50,
+                tweet_fields=["created_at"]
+            )
+            
+            if not tweets.data:
+                return render_template("error.html", message="No tweets found.")
+            
+            processed_tweets = []
+            for tweet in tweets.data:
+                text = tweet.text
+                prediction = model.predict([text])[0]
+                emotion, emoji = emotion_mapping.get(int(prediction), ("neutral", "🤔"))
+                processed_tweets.append({
+                    "text": text,
+                    "emotion": emotion,
+                    "emoji": emoji
+                })
+            
+            return render_template("tweet_results.html", 
+                                 tweets=processed_tweets,
+                                 search_term=search_query)
+            
+        except Exception as e:
+            return render_template("error.html", message=f"Twitter error: {str(e)}")
+    
+    return render_template("tweet_search.html")
+
+limiter = Limiter(app=app, key_func=lambda: request.remote_addr)
+limiter.limit("10 per minute")(analyze_tweets)
 
 if __name__ == "__main__":
     app.run(debug=True)
