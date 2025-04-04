@@ -7,3 +7,6 @@ pandas
 matplotlib
 seaborn
 gunicorn
+tweepy
+python-dotenv
+flash_limiter
